@@ -34,6 +34,7 @@ public class AuctionlandServiceImpl implements AuctionlandService {
         if(depth.equals("1"))
         {
             //return ResponseEntity.ok(locationCodeRepository.findDistinctSido());
+            //기능 구현 브랜치 체크아웃 추가할 부분
         }
 
         return null;
