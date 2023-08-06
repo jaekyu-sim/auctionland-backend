@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @Service
 public class AuctionlandServiceImpl implements AuctionlandService {
-
+    //commit test
     private final LocationCodeRepository locationCodeRepository;
 
     public AuctionlandServiceImpl(LocationCodeRepository locationCodeRepository) {
