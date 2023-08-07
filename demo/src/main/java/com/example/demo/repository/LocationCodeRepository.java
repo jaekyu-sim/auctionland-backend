@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LocationCodeRepository  extends JpaRepository<LocationCode, Long> {
-    @Query("SELECT DISTINCT lcd.locationSido FROM LOCATION_CODE lcd")
-    List<String> findDistinctSido();
+    @Query("SELECT DISTINCT lc.locationSido FROM LocationCode lc")
+    List<String> findDistinctLocationSido();
     Optional<LocationCode> findByLocationSidoAndLocationSiguAndLocationSidongAndLocationSiri(String daepyoSidoCd, String daepyoSiguCd, String daepyoSidongCd, String daepyoSiriCd);
 }

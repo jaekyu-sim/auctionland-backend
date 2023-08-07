@@ -33,8 +33,9 @@ public class AuctionlandServiceImpl implements AuctionlandService {
     public ResponseEntity<List<String>> getLocationName(String parentData, String depth){
         if(depth.equals("1"))
         {
-            //return ResponseEntity.ok(locationCodeRepository.findDistinctSido());
+            List<String> tmpData = locationCodeRepository.findDistinctLocationSido();
             //기능 구현 브랜치 체크아웃 추가할 부분
+            return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSido());
         }
 
         return null;
