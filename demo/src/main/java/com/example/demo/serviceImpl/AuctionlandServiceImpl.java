@@ -31,11 +31,13 @@ public class AuctionlandServiceImpl implements AuctionlandService {
     }
 
     public ResponseEntity<List<String>> getLocationName(String parentData, String depth){
-        if(depth.equals("1"))
+        if(depth.equals("1"))//depth 가 1인것은 가장 큰 행정구역 단위(특별시 / 도 / 광역시)
         {
-            List<String> tmpData = locationCodeRepository.findDistinctLocationSido();
-            //기능 구현 브랜치 체크아웃 추가할 부분
             return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSido());
+        }
+        else if(depth.equals("2"))//depth 가 2인것은 가장 큰 행정구역의 바로 아래단위 행정구역(구 / 시 / ...)
+        {
+            return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSigu(parentData));
         }
 
         return null;
