@@ -46,11 +46,33 @@ public class AuctionlandController {
         //System.out.println("법정동 정보 등록 완료");
     }
 
-    @GetMapping("/getLocationName")
-    public ResponseEntity<List<String>> getLocationName(@RequestParam String parentData, @RequestParam String depth)
+    @GetMapping("/getSidoLocationNameList")
+    public ResponseEntity<List<String>> getSidoLocationNameList()
     {
-        return auctionlandService.getLocationName(parentData, depth);
+        return auctionlandService.getSidoLocationNameList();
     }
+
+    @GetMapping("/getSiguLocationNameList")
+    public ResponseEntity<List<String>> getSiguLocationNameList(@RequestParam String sidoData)
+    {
+        return auctionlandService.getSiguLocationNameList(sidoData);
+    }
+
+    @GetMapping("/getSidongLocationNameList")
+    public ResponseEntity<List<String>> getSidongLocationNameList(@RequestParam String sidoData, @RequestParam String siguData)
+    {
+        return auctionlandService.getSidongLocationNameList(sidoData, siguData);
+    }
+
+    @GetMapping("/getSiriLocationNameList")
+    public ResponseEntity<List<String>> getSiriLocationNameList(@RequestParam String sidoData, @RequestParam String siguData, @RequestParam String sidongData)
+    {
+        return auctionlandService.getSiriLocationNameList(sidoData, siguData, sidongData);
+    }
+
+
+
+
 
     @GetMapping("/getAuctionData")
     public ResponseEntity<List<String>> getAuctionData(@RequestParam String daepyoSidoCd, @RequestParam String daepyoSiguCd, @RequestParam String daepyoSidongCd, @RequestParam String daepyoSiriCd) throws IOException {

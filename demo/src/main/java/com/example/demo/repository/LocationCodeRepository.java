@@ -16,6 +16,11 @@ public interface LocationCodeRepository  extends JpaRepository<LocationCode, Lon
     @Query("SELECT DISTINCT lc.locationSigu FROM LocationCode lc where lc.locationSido = :sido")
     List<String> findDistinctLocationSigu(@Param("sido") String sido);
 
+    @Query("SELECT DISTINCT lc.locationSidong FROM LocationCode lc where lc.locationSido = :sido and lc.locationSigu = :sigu")
+    List<String> findDistinctLocationSidong(@Param("sido") String Sido, @Param("sigu") String sigu);
+
+    @Query("SELECT DISTINCT lc.locationSiri FROM LocationCode lc where lc.locationSido = :sido and lc.locationSigu = :sigu and lc.locationSidong = :sidong")
+    List<String> findDistinctLocationSiri(@Param("sido") String Sido, @Param("sigu") String sigu, @Param("sidong") String sidong);
 
     Optional<LocationCode> findByLocationSidoAndLocationSiguAndLocationSidongAndLocationSiri(String daepyoSidoCd, String daepyoSiguCd, String daepyoSidongCd, String daepyoSiriCd);
 }

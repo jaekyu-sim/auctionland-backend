@@ -18,6 +18,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.util.ArrayList;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,17 +31,23 @@ public class AuctionlandServiceImpl implements AuctionlandService {
         this.locationCodeRepository = locationCodeRepository;
     }
 
-    public ResponseEntity<List<String>> getLocationName(String parentData, String depth){
-        if(depth.equals("1"))//depth 가 1인것은 가장 큰 행정구역 단위(특별시 / 도 / 광역시)
-        {
-            return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSido());
-        }
-        else if(depth.equals("2"))//depth 가 2인것은 가장 큰 행정구역의 바로 아래단위 행정구역(구 / 시 / ...)
-        {
-            return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSigu(parentData));
-        }
+    public ResponseEntity<List<String>> getSidoLocationNameList(){
 
-        return null;
+        return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSido());
+    }
+    public ResponseEntity<List<String>> getSiguLocationNameList(String sidoData){
+
+        return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSigu(sidoData));
+    }
+
+    public ResponseEntity<List<String>> getSidongLocationNameList(String sidoData, String siguData){
+
+        return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSidong(sidoData, siguData));
+    }
+
+    public ResponseEntity<List<String>> getSiriLocationNameList(String sidoData, String siguData, String sidongData){
+
+        return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSiri(sidoData, siguData, sidongData));
     }
 
     @Override
