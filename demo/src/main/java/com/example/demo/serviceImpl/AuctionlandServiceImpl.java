@@ -7,7 +7,6 @@ import com.example.demo.utils.UtilFunc;
 import java.net.http.HttpResponse;
 
 import com.example.demo.repository.LocationCodeRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +17,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
 import java.util.ArrayList;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,16 +48,25 @@ public class AuctionlandServiceImpl implements AuctionlandService {
         return ResponseEntity.ok(locationCodeRepository.findDistinctLocationSiri(sidoData, siguData, sidongData));
     }
 
+
+
+
+    public ResponseEntity<Optional<LocationCode>> getLocationCodeData(String daepyoSidoCd, String daepyoSiguCd, String daepyoSidongCd, String daepyoSiriCd) {
+        //Sido와 Sigu 값 받아오면, 이걸 숫자 코드로 바꿔서 보내주도록 구현
+        Optional<LocationCode> locationCodeFinded = locationCodeRepository.findByLocationSidoAndLocationSiguAndLocationSidongAndLocationSiri(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
+
+        return ResponseEntity.ok(locationCodeFinded);
+    }
     @Override
     public ResponseEntity<List<String>> getAuctionData(String daepyoSidoCd, String daepyoSiguCd, String daepyoSidongCd, String daepyoSiriCd) {
         // 0. parameter 로 들어온 값을 바탕으로 H2 DB 뒤져서 법정동 코드 불러오는 부분
-        Optional<LocationCode> locationCodeFinded = locationCodeRepository.findByLocationSidoAndLocationSiguAndLocationSidongAndLocationSiri(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
+        Optional<LocationCode> locationCodeFounded = locationCodeRepository.findByLocationSidoAndLocationSiguAndLocationSidongAndLocationSiri(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
         String SidoCd = "";
         String SiguCd = "";
         String SidongCd = "";
         String SiriCd = "";
-        if (locationCodeFinded.isPresent()) {
-            LocationCode locationCodeData = locationCodeFinded.get();
+        if (locationCodeFounded.isPresent()) {
+            LocationCode locationCodeData = locationCodeFounded.get();
             String tmpLocationCode = locationCodeData.getLocationCode();
             SidoCd = tmpLocationCode.substring(0, 2);
             if(SidoCd == "00") {

@@ -10,14 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse;
-import java.util.ArrayList;
-
-import com.example.demo.utils.UtilFunc;
 
 import javax.annotation.PostConstruct;
 
@@ -71,7 +63,19 @@ public class AuctionlandController {
     }
 
 
+    @GetMapping("/getLocationCodeData")
+    public ResponseEntity<Optional<LocationCode>> getLocationCodeData(@RequestParam String daepyoSidoCd, @RequestParam String daepyoSiguCd, @RequestParam String daepyoSidongCd, @RequestParam String daepyoSiriCd) throws IOException {
 
+        return auctionlandService.getLocationCodeData(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
+
+    }
+
+    @GetMapping("/getRealTradeData")
+    public ResponseEntity<Optional<LocationCode>> getRealTradeData(@RequestParam String locationCode) throws IOException {
+
+        return auctionlandService.getLocationCodeData(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
+
+    }
 
 
     @GetMapping("/getAuctionData")
