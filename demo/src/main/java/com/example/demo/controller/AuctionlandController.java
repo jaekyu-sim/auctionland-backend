@@ -70,12 +70,12 @@ public class AuctionlandController {
 
     }
 
-    @GetMapping("/getRealTradeData")
-    public ResponseEntity<Optional<LocationCode>> getRealTradeData(@RequestParam String locationCode) throws IOException {
-
-        return auctionlandService.getLocationCodeData(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
-
-    }
+//    @GetMapping("/getRealTradeData")
+//    public ResponseEntity<Optional<LocationCode>> getRealTradeData(@RequestParam String locationCode) throws IOException {
+//
+//        return auctionlandService.getLocationCodeData(daepyoSidoCd, daepyoSiguCd, daepyoSidongCd, daepyoSiriCd);
+//
+//    }
 
 
     @GetMapping("/getAuctionData")
